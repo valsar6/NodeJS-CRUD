@@ -16,12 +16,11 @@ var mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
-mongoose.connect(dbConfig.url, {
-	useMongoClient: true
-});
+mongoose.connect(dbConfig.url);
 
-mongoose.connection.on('error', function() {
+mongoose.connection.on('error', function(e) {
     console.log('Could not connect to the database. Exiting now...');
+    console.log(e)
     process.exit();
 });
 mongoose.connection.once('open', function() {
