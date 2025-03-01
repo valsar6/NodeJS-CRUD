@@ -1,8 +1,14 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var NoteSchema = mongoose.Schema({
-    title: String,
-    content: String
+const NoteSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true
+    },
+    content: {
+        type: String,
+        required: true
+    }
 }, {
     timestamps: true
 });
