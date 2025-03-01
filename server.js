@@ -29,6 +29,7 @@ async function main() {
 
     require('./app/routes/note.routes.js')(app);
     require('./app/routes/location.routes.js')(app);
+    require('./app/routes/schema.routes.js')(app);
 
     // listen for requests
     app.listen(3000, () => {
