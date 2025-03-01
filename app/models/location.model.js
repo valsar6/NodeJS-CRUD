@@ -1,22 +1,32 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
-var LocationSchema = mongoose.Schema({
+const LocationSchema = new mongoose.Schema({
   location_name: {
-      type: String,
-      required: true
+    type: String,
+    required: true
   },
-  points: { 'type': {type: String, enum: "Point", default: "Point"}, coordinates: { type: [Number],   default: [0,0]} },
-  emotion: {
+  points: {
+    type: {
       type: String,
-      enum: ['angry','sad','happy','neutral'],
-      default: 'happy',
-      required: true
+      enum: ["Point"],
+      default: "Point"
+    },
+    coordinates: {
+      type: [Number],
+      default: [0, 0]
+    }
+  },
+  emotion: {
+    type: String,
+    enum: ['angry', 'sad', 'happy', 'neutral'],
+    default: 'happy',
+    required: true
   }
-
 }, {
-    timestamps: true
+  timestamps: true
 });
 
-LocationSchema.index({ "points": "2dsphere" });
+// Create a 2dsphere index on the points field for geospatial queries
+LocationSchema.index({ points: "2dsphere" });
 
 module.exports = mongoose.model('Location', LocationSchema);
